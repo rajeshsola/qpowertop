@@ -1,8 +1,0 @@
-
-1.0 --
-	* Added powertop files with cpp extension
-	* Added mainwindow.ui
-	* Added main.cpp, mainwindow.h, mainwindow.cpp
-	* Generated qpowertop.pro
-	* Replaced Makefile with qmake
-
