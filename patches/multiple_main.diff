@@ -1,0 +1,11 @@
+--- powertop.cpp	2009-12-01 23:21:41.000000000 +0530
++++ powertop.cpp	2009-12-01 23:50:20.000000000 +0530
+@@ -680,7 +680,7 @@
+ 	exit(0);
+ }
+ 
+-int main(int argc, char **argv)
++int pmain(int argc, char **argv)
+ {
+ 	char line[1024];
+ 	int ncursesinited=0;
