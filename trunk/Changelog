@@ -1,0 +1,7 @@
+
+1.0 -- Revision 9
+	* Added powertop files with cpp extension
+	* Added mainwindow.ui,Added main.cpp, mainwindow.h, mainwindow.cpp
+	* Added generated qpowertop.pro
+	* Added generated Makefile
+
