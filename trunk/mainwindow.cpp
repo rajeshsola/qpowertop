@@ -24,4 +24,3 @@ void MainWindow::changeEvent(QEvent *e)
         break;
     }
 }
-

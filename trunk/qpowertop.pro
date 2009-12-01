@@ -6,7 +6,8 @@ TEMPLATE = app
 INCLUDEPATH += .
 
 # Input
-HEADERS += powertop.h
+HEADERS += powertop.h \
+	   mainwindow.h
 INTERFACES += mainwindow.ui
 SOURCES += bluetooth.cpp \
            config.cpp \
@@ -16,6 +17,7 @@ SOURCES += bluetooth.cpp \
            ethernet.cpp \
            intelcstates.cpp \
            main.cpp \
+	   mainwindow.cpp \
            misctips.cpp \
            powertop.cpp \
            process.cpp \
