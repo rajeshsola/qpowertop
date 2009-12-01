@@ -25,4 +25,3 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
-

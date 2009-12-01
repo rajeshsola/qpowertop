@@ -79,23 +79,23 @@ void reset_suggestions(void)
 
 void add_suggestion(char *text, int weight, char key, char *keystring, suggestion_func *func)
 {
-	struct suggestion *new;
+       struct suggestion *snew;
 
 	if (!text)
 		return;
 
-	new = malloc(sizeof(struct suggestion));
-	if (!new)
+       snew = (suggestion*)malloc(sizeof(struct suggestion));
+       if (!snew)
 		return;
-	memset(new, 0, sizeof(struct suggestion));
-	new->string = strdup(text);
-	new->weight = weight;
-	new->key = key;
+       memset(snew, 0, sizeof(struct suggestion));
+       snew->string = strdup(text);
+       snew->weight = weight;
+       snew->key = key;
 	if (keystring)
-		new->keystring = strdup(keystring);
-	new->next = suggestions;
-	new->func = func;
-	suggestions = new;
+                snew->keystring = strdup(keystring);
+       snew->next = suggestions;
+       snew->func = func;
+       suggestions = snew;
 	total_weight += weight;
 }
 

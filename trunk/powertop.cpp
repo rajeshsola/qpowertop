@@ -95,7 +95,7 @@ void push_line(char *string, int count)
 			return;
 		}
 	if (linehead == linesize)
-		lines = realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
+               lines = (line*)realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
 	lines[linehead].string = strdup (string);
 	lines[linehead].count = count;
 	lines[linehead].pid[0] = 0;
@@ -114,7 +114,7 @@ void push_line_pid(char *string, int count, char *pid)
 			return;
 		}
 	if (linehead == linesize)
-		lines = realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
+               lines = (line*)realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
 	lines[linehead].string = strdup (string);
 	lines[linehead].count = count;
 	if (pid)
@@ -466,7 +466,7 @@ void start_timerstats(void)
 
 int line_compare (const void *av, const void *bv)
 {
-	const struct line	*a = av, *b = bv;
+       const struct line *a = (line*)av, *b = (line*)bv;
 	return b->count - a->count;
 }
 
@@ -680,7 +680,7 @@ void usage()
 	exit(0);
 }
 
-int main(int argc, char **argv)
+int pmain(int argc, char **argv)
 {
 	char line[1024];
 	int ncursesinited=0;

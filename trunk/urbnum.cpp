@@ -90,7 +90,7 @@ static void update_urbnum(char *path, uint64_t count, char *shortname)
 		ptr = ptr->next;
 	}
 	/* no luck, new one */
-	ptr = malloc(sizeof(struct device_data));
+       ptr = (device_data*)malloc(sizeof(struct device_data));
 	assert(ptr!=0);
 	memset(ptr, 0, sizeof(struct device_data));
 	ptr->next = devices;

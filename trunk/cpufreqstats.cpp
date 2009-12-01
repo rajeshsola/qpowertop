@@ -52,13 +52,13 @@ static void zap(void)
 
 int sort_by_count (const void *av, const void *bv)
 {
-        const struct cpufreqdata       *a = av, *b = bv;
+        const struct cpufreqdata *a = (cpufreqdata*)av,*b = (cpufreqdata*)bv;
         return b->count - a->count;
 } 
 
 int sort_by_freq (const void *av, const void *bv)
 {
-        const struct cpufreqdata       *a = av, *b = bv;
+        const struct cpufreqdata *a = (cpufreqdata*)av, *b = (cpufreqdata*)bv;
         return b->frequency - a->frequency;
 } 
 
