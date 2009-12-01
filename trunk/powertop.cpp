@@ -786,11 +786,8 @@ int pmain(int argc, char **argv)
 
 		if (!dump) {
 			if (!ncursesinited) {
-				initialize_curses();  
 				ncursesinited++;
 			}
-			setup_windows();
-			show_title_bar();
 		}
 
 		memset(&cstate_lines, 0, sizeof(cstate_lines));
@@ -1050,7 +1047,6 @@ int pmain(int argc, char **argv)
 
 		if (!key)
 			pick_suggestion();
-		show_title_bar();
 
 		fflush(stdout);
 		if (!key && ticktime >= 4.8) {	/* quiet down the effects of any IO to xterms */
