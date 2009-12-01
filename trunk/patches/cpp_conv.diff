@@ -1,0 +1,108 @@
+--- cpufreqstats.cpp	2009-12-01 23:21:41.000000000 +0530
++++ cpufreqstats.cpp	2009-12-01 23:38:08.000000000 +0530
+@@ -52,13 +52,13 @@
+ 
+ int sort_by_count (const void *av, const void *bv)
+ {
+-        const struct cpufreqdata       *a = av, *b = bv;
++        const struct cpufreqdata *a = (cpufreqdata*)av,*b = (cpufreqdata*)bv;
+         return b->count - a->count;
+ } 
+ 
+ int sort_by_freq (const void *av, const void *bv)
+ {
+-        const struct cpufreqdata       *a = av, *b = bv;
++        const struct cpufreqdata *a = (cpufreqdata*)av, *b = (cpufreqdata*)bv;
+         return b->frequency - a->frequency;
+ } 
+ 
+--- suggestions.cpp	2009-12-01 23:21:41.000000000 +0530
++++ suggestions.cpp	2009-12-01 23:47:45.000000000 +0530
+@@ -79,23 +79,23 @@
+ 
+ void add_suggestion(char *text, int weight, char key, char *keystring, suggestion_func *func)
+ {
+-	struct suggestion *new;
++       struct suggestion *snew;
+ 
+ 	if (!text)
+ 		return;
+ 
+-	new = malloc(sizeof(struct suggestion));
+-	if (!new)
++       snew = (suggestion*)malloc(sizeof(struct suggestion));
++       if (!snew)
+ 		return;
+-	memset(new, 0, sizeof(struct suggestion));
+-	new->string = strdup(text);
+-	new->weight = weight;
+-	new->key = key;
++       memset(snew, 0, sizeof(struct suggestion));
++       snew->string = strdup(text);
++       snew->weight = weight;
++       snew->key = key;
+ 	if (keystring)
+-		new->keystring = strdup(keystring);
+-	new->next = suggestions;
+-	new->func = func;
+-	suggestions = new;
++                snew->keystring = strdup(keystring);
++       snew->next = suggestions;
++       snew->func = func;
++       suggestions = snew;
+ 	total_weight += weight;
+ }
+ 
+--- urbnum.cpp	2009-12-01 23:21:41.000000000 +0530
++++ urbnum.cpp	2009-12-01 23:48:04.000000000 +0530
+@@ -90,7 +90,7 @@
+ 		ptr = ptr->next;
+ 	}
+ 	/* no luck, new one */
+-	ptr = malloc(sizeof(struct device_data));
++       ptr = (device_data*)malloc(sizeof(struct device_data));
+ 	assert(ptr!=0);
+ 	memset(ptr, 0, sizeof(struct device_data));
+ 	ptr->next = devices;
+
+--- wireless.cpp	2009-12-02 00:05:14.000000000 +0530
++++ wireless.cpp	2009-12-02 00:07:02.000000000 +0530
+@@ -261,7 +261,7 @@
+ 
+ 	memset(&driver, 0, sizeof(driver));
+ 	driver.cmd = ETHTOOL_GDRVINFO;
+-        ifr.ifr_data = (void*) &driver;
++        ifr.ifr_data = (char*) &driver;
+         ret = ioctl(sock, SIOCETHTOOL, &ifr);
+ 
+ 	sprintf(rfkill_path,"/sys/bus/pci/devices/%s/rfkill/rfkill0/state", driver.bus_info);
+
+--- powertop.cpp	2009-12-01 23:21:41.000000000 +0530
++++ powertop.cpp	2009-12-01 23:50:20.000000000 +0530
+@@ -95,7 +95,7 @@
+ 			return;
+ 		}
+ 	if (linehead == linesize)
+-		lines = realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
++               lines = (line*)realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
+ 	lines[linehead].string = strdup (string);
+ 	lines[linehead].count = count;
+ 	lines[linehead].pid[0] = 0;
+@@ -114,7 +114,7 @@
+ 			return;
+ 		}
+ 	if (linehead == linesize)
+-		lines = realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
++               lines = (line*)realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
+ 	lines[linehead].string = strdup (string);
+ 	lines[linehead].count = count;
+ 	if (pid)
+@@ -466,7 +466,7 @@
+ 
+ int line_compare (const void *av, const void *bv)
+ {
+-	const struct line	*a = av, *b = bv;
++       const struct line *a = (line*)av, *b = (line*)bv;
+ 	return b->count - a->count;
+ }
+ 
