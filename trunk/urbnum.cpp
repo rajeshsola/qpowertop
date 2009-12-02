@@ -90,7 +90,7 @@ static void update_urbnum(char *path, uint64_t count, char *shortname)
 		ptr = ptr->next;
 	}
 	/* no luck, new one */
-	ptr = malloc(sizeof(struct device_data));
+       ptr = (device_data*)malloc(sizeof(struct device_data));
 	assert(ptr!=0);
 	memset(ptr, 0, sizeof(struct device_data));
 	ptr->next = devices;
@@ -136,8 +136,6 @@ void count_usb_urbs(void)
 	char pathname[PATH_MAX];
 	char buffer[4096];
 	struct device_data *dev;
-	int len;
-	char linkto[PATH_MAX];
 
 	dir = opendir("/sys/bus/usb/devices");
 	if (!dir)
@@ -147,19 +145,11 @@ void count_usb_urbs(void)
 	while ((dirent = readdir(dir))) {
 		if (dirent->d_name[0]=='.')
 			continue;
-
-		/* skip usb input devices */
-		sprintf(filename, "/sys/bus/usb/devices/%s/driver", dirent->d_name);
-		len = readlink(filename, linkto, sizeof(link) - 1);
-		if (strstr(linkto, "usbhid"))
-			continue;
-
 		sprintf(pathname, "/sys/bus/usb/devices/%s", dirent->d_name);
 		sprintf(filename, "%s/urbnum", pathname);
 		file = fopen(filename, "r");
 		if (!file)
 			continue;
-
 		memset(buffer, 0, 4096);
 		fgets(buffer, 4095, file);
 		update_urbnum(pathname, strtoull(buffer, NULL, 10), dirent->d_name);
