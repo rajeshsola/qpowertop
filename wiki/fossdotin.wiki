@@ -1,6 +1,6 @@
 #summary Status of Tech Talk "Go Green - Save Power" @ FOSS.IN 2009
 
-= Status upto Dec 2nd 14:00 IST =
+= Status upto Dec 2nd 2009 14:00 IST =
 
 ** powertop code is converted to work with qt <br>
 ** Added basic interface <br>
