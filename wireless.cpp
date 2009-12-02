@@ -261,7 +261,7 @@ void find_wireless_nic(void)
 
 	memset(&driver, 0, sizeof(driver));
 	driver.cmd = ETHTOOL_GDRVINFO;
-        ifr.ifr_data = (void*) &driver;
+        ifr.ifr_data = (char*) &driver;
         ret = ioctl(sock, SIOCETHTOOL, &ifr);
 
 	sprintf(rfkill_path,"/sys/bus/pci/devices/%s/rfkill/rfkill0/state", driver.bus_info);

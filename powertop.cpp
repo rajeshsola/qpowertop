@@ -97,7 +97,7 @@ void push_line(char *string, int count)
 			return;
 		}
 	if (linehead == linesize)
-		lines = realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
+               lines = (line*)realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
 	lines[linehead].string = strdup (string);
 	lines[linehead].count = count;
 	lines[linehead].pid[0] = 0;
@@ -116,7 +116,7 @@ void push_line_pid(char *string, int count, char *pid)
 			return;
 		}
 	if (linehead == linesize)
-		lines = realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
+               lines = (line*)realloc (lines, (linesize ? (linesize *= 2) : (linesize = 64)) * sizeof (struct line));
 	lines[linehead].string = strdup (string);
 	lines[linehead].count = count;
 	if (pid)
@@ -527,7 +527,7 @@ void start_timerstats(void)
 
 int line_compare (const void *av, const void *bv)
 {
-	const struct line	*a = av, *b = bv;
+       const struct line *a = (line*)av, *b = (line*)bv;
 	return b->count - a->count;
 }
 
@@ -693,8 +693,8 @@ int print_battery_proc_pmu(void)
 		discharge_mA += this_discharge_mA;
 		/* rem_time_sec += this_rem_time_sec; */
 	}
-	show_pmu_power_line(voltage_mV, charge_mAh, max_charge_mAh,
-	                    discharge_mA);
+	//show_pmu_power_line(voltage_mV, charge_mAh, max_charge_mAh,
+	  //                  discharge_mA);
 	return 1;
 }
 
@@ -832,7 +832,7 @@ void version()
 	exit(0);
 }
 
-int main(int argc, char **argv)
+int pmain(int argc, char **argv)
 {
 	char line[1024];
 	int ncursesinited=0;
@@ -947,11 +947,8 @@ int main(int argc, char **argv)
 
 		if (!dump) {
 			if (!ncursesinited) {
-				initialize_curses();  
 				ncursesinited++;
 			}
-			setup_windows();
-			show_title_bar();
 		}
 
 		memset(&cstate_lines, 0, sizeof(cstate_lines));
@@ -1196,7 +1193,7 @@ int main(int argc, char **argv)
 		suggest_ac97_powersave();
 		suggest_hda_powersave();
 		suggest_wireless_powersave();
-		suggest_wifi_new_powersave();
+		//suggest_wifi_new_powersave();
 		suggest_ondemand_governor();
 		suggest_noatime();
 		suggest_sata_alpm();
@@ -1215,7 +1212,6 @@ int main(int argc, char **argv)
 
 		if (!key)
 			pick_suggestion();
-		show_title_bar();
 
 		fflush(stdout);
 		if (!key && ticktime >= 4.8) {	/* quiet down the effects of any IO to xterms */
