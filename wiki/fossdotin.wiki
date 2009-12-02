@@ -1,5 +1,18 @@
-#summary One-sentence summary of this page.
+#summary Status of Tech Talk "Go Green - Save Power" @ FOSS.IN 2009
 
-= Status @ FOSS.IN 2009 =
+= Status upto Dec 2nd 14:00 IST =
 
-Add your content here.
+- powertop code is converted to work with qt 
+- Added basic interface
+- Need to connect UI part and powertop code
+- Working copy (but raw code) available in Downloads section
+   
+= Wish List =
+- Pictorial representation for CPU, BIOS states
+- Colour Highlighting
+- Actions on suggestions
+- Top causes for wakeups
+- Panel Notifications
+- Profiling power usage, wakeups
+- Good documentation
+- Coding standards
