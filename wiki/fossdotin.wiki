@@ -2,17 +2,17 @@
 
 = Status upto Dec 2nd 14:00 IST =
 
-** powertop code is converted to work with qt 
-** Added basic interface
-** Need to connect UI part and powertop code
-** Working copy (but raw code) available in Downloads section
+** powertop code is converted to work with qt <br>
+** Added basic interface <br>
+** Need to connect UI part and powertop code <br>
+** Working copy (but raw code) available in Downloads section <br>
    
 = Wish List =
-** Pictorial representation for CPU, BIOS states
-** Colour Highlighting
-** Actions on suggestions
-** Top causes for wakeups
-** Panel Notifications
-** Profiling power usage, wakeups
-** Good documentation
-** Coding standards
+** Pictorial representation for CPU, BIOS states <br>
+** Colour Highlighting <br>
+** Actions on suggestions <br>
+** Top causes for wakeups <br>
+** Panel Notifications <br>
+** Profiling power usage, wakeups <br>
+** Good documentation <br>
+** Coding standards <br>
